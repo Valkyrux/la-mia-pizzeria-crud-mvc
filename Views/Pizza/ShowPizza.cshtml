@@ -1,0 +1,28 @@
+﻿@model la_mia_pizzeria_model.Models.Pizza
+
+@{
+    ViewData["Title"] = ViewData["nomePizzeria"] + "-" + Model.Name;
+}
+
+<div class="row">
+    <div class="col-12 col-sm-6 col-md-3 mb-2">
+        <div class="card">
+            <div class="card-img-top">
+                <img src="~/img/@Model.ImgPath" alt="@Model.Name">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">"@Model.Description"</p>
+                <p>@Model.getPriceToString() &euro;</p>
+            </div>
+            <div class="card-footer">
+                <button class="btn-primary btn">@Html.ActionLink("Torna Indietro", "Index", "Pizza", null, new { @class = "text-light text-decoration-none"})</button>
+                <button class="btn-primary btn">@Html.ActionLink("Modifica Pizza", "UpdatePizza", "Pizza", new { @id = Model.Id}, new { @class = "text-light text-decoration-none"})</button>
+                <form method="post" asp-controller="Pizza" asp-action="DeletePizza" asp-route-id="@Model.Id">
+                    @Html.AntiForgeryToken()
+                    <input type="submit" class = "btn btn-danger text-light text-decoration-none" value="Cancella Pizza"/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

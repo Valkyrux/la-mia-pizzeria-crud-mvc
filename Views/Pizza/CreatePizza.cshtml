@@ -1,0 +1,50 @@
+﻿@model la_mia_pizzeria_model.Models.Pizza
+
+@{
+    ViewData["Title"] = "Inserisci Pizza da mostrare";
+    Layout = "_Layout";
+}
+
+@using(Html.BeginForm("ValidatePizza", "Pizza", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+        @Html.ValidationSummary()
+        <table cellpadding="0" cellspacing="0" class="center">
+        <tr>
+            <th colspan="2" align="center">Inserisci una Pizza</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Id) </td>
+            <td>
+                @Html.TextBoxFor(m => m.Id)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Name)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Name)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.Description)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Description)
+            </td>
+        </tr>
+                <tr>
+            <td>@Html.DisplayNameFor(m => m.Price)</td>
+            <td>
+                @Html.TextBoxFor(m => m.Price)
+            </td>
+        </tr>
+        <tr>
+            <td>File: </td>
+            <td>
+                @Html.TextBoxFor(m => m.formFile, new {type = "file"})
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Inserisci Pizza"/></td>
+        </tr>
+    </table>
+}

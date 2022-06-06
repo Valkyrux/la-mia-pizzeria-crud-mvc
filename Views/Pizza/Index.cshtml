@@ -1,0 +1,52 @@
+﻿@model List<la_mia_pizzeria_model.Models.Pizza>
+
+@{
+    ViewData["Title"] = ViewData["nomePizzeria"];
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"]</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/la_mia_pizzeria_static.styles.css" asp-append-version="true" />
+    </head>
+    <body>
+        <div>
+            <h1 class="display-4 text-center">Benvenuto in @ViewData["nomePizzeria"]</h1>
+            <div class="container">
+                <h2 class="row">@Html.ActionLink("Aggiungi una Pizza", "CreatePizza", "Pizza")</h2>
+                <div class="row">
+                    @foreach(var pizza in Model)
+                    {
+                        <div class="col-12 col-sm-6 col-md-3 mb-2">
+                            <div class="card">
+                                <div class="card-img-top">
+                                    <img src="~/img/@pizza.ImgPath" alt="@pizza.Name">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">@pizza.Name</h5>
+                                    <p class="card-text">"@pizza.Description"</p>
+                                    <p>@pizza.getPriceToString() &euro;</p>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn-primary btn">@Html.ActionLink("Seleziona", "ShowPizza", "Pizza", new {id = pizza.Id}, new { @class = "text-light text-decoration-none"})</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2022 - Valkyrux - <a asp-area="" asp-controller="Home"></a>
+            </div>
+        </footer>
+    </body>
+</html>
